@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE ACTIONS SYSTEM "actions.dtd">
+<ACTIONS>
+	<ACTION NAME="open-tuProlog-shell">
+		<CODE>
+			wm.addDockableWindow("console");
+			dockable = wm.getDockableWindow("console");
+			dockable.setShell("tuProlog");
+		</CODE>
+	</ACTION>
+	<ACTION NAME="prologconsole.consult-current-buffer">
+		<CODE>
+            runCommandInConsole(view, "tuProlog", "consult.");
+		</CODE>
+	</ACTION>
+	<ACTION NAME="prologconsole.clear-engine-and-consult">
+		<CODE>
+            runCommandInConsole(view, "tuProlog", "new.");
+            runCommandInConsole(view, "tuProlog", "consult.");
+		</CODE>
+	</ACTION>
+</ACTIONS>

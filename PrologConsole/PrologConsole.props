@@ -1,0 +1,21 @@
+# Plugin properties
+plugin.prolog.shell.PrologConsolePlugin.name = Prolog Console
+plugin.prolog.shell.PrologConsolePlugin.author = Giulio Piancastelli
+plugin.prolog.shell.PrologConsolePlugin.version = 0.5
+plugin.prolog.shell.PrologConsolePlugin.depend.0 = jedit 04.00.08.00
+plugin.prolog.shell.PrologConsolePlugin.depend.1 = plugin console.ConsolePlugin 3.2
+plugin.prolog.shell.PrologConsolePlugin.jars = tuprolog.jar
+plugin.prolog.shell.PrologConsolePlugin.docs = docs/PrologConsole.html
+
+# Menu
+plugin.prolog.shell.PrologConsolePlugin.menu=open-tuProlog-shell - prologconsole.consult-current-buffer \
+prologconsole.clear-engine-and-consult
+
+# Action labels
+open-tuProlog-shell.label=Open tuProlog Shell
+prologconsole.consult-current-buffer.label = Consult Current Buffer
+prologconsole.clear-engine-and-consult.label = Clear Engine and Consult
+
+# Macro handler properties
+macro-handler.prolog.label = Prolog
+macro-handler.prolog.glob = *.pro

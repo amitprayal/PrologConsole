@@ -1,0 +1,115 @@
+<html>
+
+<head>
+	<title>PrologConsole Plugin Documentation</title>
+</head>
+
+<body>
+	<h1>PrologConsole Plugin Documentation</h1>
+	<p>PrologConsole is a jEdit plug-in embedding a Prolog engine in the jEdit text editor. The chosen Prolog engine is
+	tuProlog, a Java-based very light-weight Prolog system developed at the University of Bologna and Cesena. If you are
+	reading this and want to download and install the plug-in, I assume that you are familiar with Prolog programming: so,
+	I'm going to just explain how the plug-in and its interface work accomplishing the integration between jEdit and
+	tuProlog.</p>
+	<div align="center"><img src="tuPrologShell.gif" alt="The tuProlog Shell embedded in the Console plugin"/></div>
+	<p>The plugin is embedded as a shell in the Console plugin, so you <b>must</b> have the Console plugin installed in
+	order to be able to use the PrologConsole plugin. You can then access the PrologConsole plugin 	only by starting the
+	Console plugin and choosing the tuProlog shell from the drop-down list at the top left corner of the Console plugin
+	interface.</p>
+
+	<h2>How to use the tuProlog shell</h2>
+	<p>To solve a Prolog goal using the the tuProlog shell you have to type the goal in the textfield provided by the Console
+	plugin interface and press the Enter key (or press the &quot;Run&quot; button). tuProlog can solve goals using all the
+	ISO predicates (e.g. write/1, is/2) and any predicate provided by the user.</p>
+	<p>To control the tuProlog system, the following predicates can be used:
+	<ul>
+		<li>the <b>consult</b> predicate is used to import all the clauses in the current jEdit buffer into the tuProlog
+		engine's theory. tuProlog mantains internally all the standard ISO predicates (e.g. write/1, is/2) and other facilities
+		like predicates for list manipulation (e.g. append/3, member/2), plus a theory containing all the user defined
+		predicates feeded into it. This theory can be augmented with new predicates, or reset to a blank new theory at
+		user's will.</li>
+		<li>the <b>listing</b> predicate is used to display all the predicates composing the engine's current theory in
+		the Console plugin output area.</li>
+		<li>the <b>new</b> predicate is used to clear the engine's theory and start with a new, blank theory.</li>
+	</ul>
+	When you are solving a goal with multiple solution, a &quot;?&quot; will appear after each solution, in order to ask
+	the user if she wants to get another solution to the same goal. The user has two choices:
+	<ul>
+		<li>if she wants to ask the engine for another solution to the goal currently being solved, she just has to type
+		<b>;</b> in the Console plugin textfield and press the Enter key or the &quot;Run&quot; button.</li>
+		<li>if she wants to accept the current solution, she just has nothing to do.</li>
+	</ul>
+	Please note that a goal remains the engine's current goal until all of its solutions have been found, or the engine begin
+	to solve another goal (this does not happens if the engine is asked to solve a goal with a syntax error in it).</p>
+	<p>Please refer to the Console plugin documentation if you want to know how to use the Console plugin interface and
+	how the Console plugin works.</p>
+
+	<h2>PrologConsole actions</h2>
+	<p>Starting with version 0.4, PrologConsole defines some actions to be included in the Plugins menu.</p>
+	<div align="center">
+		<img src="PrologConsoleActions.gif" alt="The PrologConsole actions included in the Plugins menu"/>
+	</div>
+	<p>As you can see in the above picture, PrologConsole defines the following actions:
+	<ul>
+		<li><b>Consult Current Buffer</b> has the same effect of the <i>consult/0</i> predicate explained above: this
+		action imports all the clauses in the current jEdit buffer into the tuProlog engine's theory.</li>
+		<li><b>Clear Engine and Consult</b> combines the effects of the <i>new/0</i> predicate and the <i>consult/0</i>
+		predicate: this action clears the engine's theory and imports in the new blank theory all the clauses in the current
+		jEdit buffer.</li>
+	</ul>
+	These actions are primarily defined so that you can assign them a shortcut and simply invoke those commands with a
+	keystroke, rather than typing in the Console, which is an activity that could be a bit annoying, even using the history
+	feature provided by the plugin.</p>
+
+	<h2>Consulting Prolog theories at startup</h2>
+	<p>Starting with the jEdit 4.1 series, you can write a script to be run by jEdit at startup in languages other than BeanShell,
+	which was the only language supported by previous jEdit versions. Starting with version 0.4, PrologConsole registers a macro
+	handler to jEdit, so that you can put Prolog startup scripts in the ~/.jedit/startup or %JEDIT-HOME%/startup directories
+	and having them run by jEdit at startup.</p>
+	<p>But what exactly is a &quot;Prolog startup script&quot;, and what are the effects of having it run at startup?</p>
+	<p>A Prolog startup script is just a Prolog theory containing facts and clauses. Having a Prolog script run at startup has
+	the effect of feeding the Prolog engine with the theory contained in the script, so that you can immediately issue queries,
+	involving that particular theory, to the Prolog engine, instead of relying on manual theory consulting as previous versions
+	of PrologConsole forced you to. If a Prolog startup script contains a syntax error, the consulting silently fails, logging an
+	InvalidTheoryException to the activity.log file in your ~/.jedit directory.</p>
+	<p>Please note that <b>this feature is only available under the jEdit 4.1 series and above</b>. Prolog scripts will not
+	be run at	startup under jEdit 4.0 and below, but you can have them consulted (i.e. feeded to the Prolog engine) through
+	the Macros>Run Other Macro... menu command.</p>
+
+	<h2>Requirements</h2>
+	<p>The PrologConsole plug-in was developed under jEdit version 4.0final and embedded as a Console plugin shell, so the
+	current requirements are: Console plugin version 3.2, and jEdit version 4.0final. The tuProlog engine (currenlty in version
+	1.2.0) is also required, but a copy is a provided within the PrologConsole zip archive.</p>
+	<p>jEdit can be found at <a href="http://www.jedit.org/">http://www.jedit.org</a></p>
+	<p>tuProlog can be found at
+	<a href="http://sourceforge.net/projects/tuprolog/">http://sourceforge.net/projects/tuprolog</a> and at
+	<a href="http://lia.deis.unibo.it/Research/2P/">http://lia.deis.unibo.it/Research/2P</a>.</p>
+
+	<h2>Contacts</h2>
+	<p>The plugin's author is Giulio Piancastelli, and can be contacted writing to
+	<a href="mailto:gpian@softhome.net">gpian@softhome.net</a>. Please note that I am not the jEdit or Console plugin
+	main developer, nor the tuProlog mantainer: please report to me bugs and suggestions related to the PrologConsole plugin
+	only, and report the ones related to the text editor or the Console plugin or the Prolog system to their respective
+	authors.</p>
+
+	<h2>Change Log</h2>
+	<dl>
+		<dt><b>Version 0.4</b></dt>
+		<dd>Added two actions (Consult Current Buffer, Clear Engine and Consult) to the jEdit Plugins menu. Registered
+		a Macros.Handler so that an user can have Prolog theories consulted at startup (note that this feature works only
+		under the jEdit 4.1 series and above -- see the plugin documentation for further details). Requires jEdit 4.0final,
+        Console 3.2 and tuProlog 1.2.0.</dd>
+        <dt><b>Version 0.3</b></dt>
+		<dd>Added lazy initialization of the Prolog engine, in order to lighten the burden on the jEdit startup time. The
+		Console text area is now enabled to display the engine's spy information when solving a Prolog goal (see the use of the
+		spy/0 and nospy/0 predicates in the tuProlog documentation). Added a missing docs property in the PrologPlugin.props
+		file. Requires jEdit 4.0final, Console 3.2 and tuProlog 1.2.0.</dd>
+		<dt><b>Version 0.2</b></dt>
+		<dd>Rewritten to make the plugin a Console shell. Requires jEdit 4.0final, Console 3.2 and tuProlog 1.1.0.</dd>
+		<dt><b>Version 0.1</b></dt>
+		<dd>Initial release. Developed under jEdit 4.0final and tuProlog 1.1.0.</dd>
+	</dl>
+
+</body>
+
+</html>
